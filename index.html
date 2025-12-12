@@ -1,57 +1,314 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ruang Ekspresi — Pixel Match</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --muted:#6b7280;
+      --accent:#1557b2;
+      --card:#ffffff;
+      --soft-shadow: 0 10px 30px rgba(2,6,23,0.08);
+      --radius-lg:18px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; margin:0; color:#0f172a; background:var(--bg); -webkit-font-smoothing:antialiased}
+    a{color:inherit; text-decoration:none}
+
+    .wrap{max-width:1180px; margin:0 auto; padding:28px 20px}
+
+    /* NAVBAR */
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px}
+    .brand{display:flex; gap:12px; align-items:center}
+    .brand img{height:36px}
+    .nav-links{display:flex; gap:22px; align-items:center}
+    .nav-links a{font-size:14px; color:var(--muted)}
+    .cta{background:var(--accent); color:#fff; padding:9px 14px; border-radius:10px; font-weight:600}
+
+    /* HERO */
+    .hero{display:grid; grid-template-columns:1fr 460px; gap:28px; align-items:center; margin-top:6px}
+    .hero-left h1{font-size:44px; line-height:1.04; margin:0; font-weight:700}
+    .hero-left h1 .accent{color:var(--accent)}
+    .badges{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
+    .badge{background:#fff; padding:8px 14px; border-radius:999px; box-shadow:var(--soft-shadow); font-size:13px; color:#12263f}
+
+    .hero-right{display:flex; justify-content:center}
+    .card-hero{width:420px; border-radius:var(--radius-lg); overflow:hidden; background:linear-gradient(180deg,#fff,#fbfbff); box-shadow:var(--soft-shadow); border:1px solid rgba(6,24,42,0.04)}
+    .card-hero img{display:block; width:100%; height:100%; object-fit:cover}
+
+    /* FOUR PILLARS */
+    .section{margin-top:46px}
+    .section h2{font-size:22px; margin:0; font-weight:700}
+    .section p.lead{color:var(--muted); margin-top:8px}
+
+    .pillars{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:18px}
+    .pillar{background:var(--card); border-radius:14px; padding:18px; box-shadow:var(--soft-shadow); border:1px solid rgba(2,6,23,0.04)}
+    .pillar h4{margin:0 0 8px 0}
+    .pillar p{margin:0; color:var(--muted); font-size:14px}
+
+    /* SCHEDULE (baru) */
+    .schedule{margin-top:28px}
+    .schedule .schedule-header{max-width:900px; margin:0 auto 24px; text-align:center}
+    .schedule .schedule-header h3{margin:0; font-size:22px; font-weight:700}
+    .schedule .schedule-header .muted{margin-top:8px; color:var(--muted)}
+
+    .schedule .photo-placeholder{max-width:900px; margin:0 auto 20px; border-radius:12px; overflow:hidden}
+    .schedule .photo-placeholder img{width:100%; display:block; height:280px; object-fit:cover}
+
+    .schedule-grid{max-width:900px; margin:0 auto 18px; display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+    .sched-card{background:var(--card); padding:18px; border-radius:12px; box-shadow:var(--soft-shadow); border:1px solid rgba(2,6,23,0.04)}
+
+    .schedule-features{max-width:1100px; margin:20px auto 0; padding:0 10px}
+    .features-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+    .feature-card{background:var(--card); padding:18px; border-radius:12px; text-align:center; box-shadow:var(--soft-shadow); border:1px solid rgba(2,6,23,0.04)}
+    .feature-card .title{font-weight:700; color:var(--accent); margin-bottom:8px}
+    .feature-card .desc{color:var(--muted); font-size:14px}
+
+    /* SHOWCASE */
+    .showcase{margin-top:28px}
+    .showcase-wrap{display:grid; grid-template-columns:1fr 380px; gap:20px; align-items:center}
+    .showcase-left .pill-badge{background:#eaf3ff; display:inline-block; padding:7px 12px; border-radius:999px; color:var(--accent); font-weight:600; font-size:13px}
+    .author img{width:48px; height:48px; border-radius:999px; object-fit:cover}
+    .showcase-right{border-radius:14px; overflow:hidden; box-shadow:var(--soft-shadow); border:6px solid rgba(255,182,193,0.22); background:#fff}
+    .showcase-right img{display:block; width:100%; height:100%; object-fit:cover}
+
+    /* TESTIMONIALS */
+    .tests{margin-top:26px}
+    .test-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .test-card{background:var(--card); padding:16px; border-radius:12px; box-shadow:var(--soft-shadow); display:flex; gap:12px}
+    .test-card .avatar{width:56px; height:56px; border-radius:999px; object-fit:cover}
+
+    /* FOOTER */
+    footer{margin-top:40px; background:#071a3a; color:#e7eefc; padding:36px 20px; border-radius:12px}
+    .fgrid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; max-width:1100px; margin:0 auto}
+
+    /* responsiveness */
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr 360px}
+      .showcase-wrap{grid-template-columns:1fr 320px}
+      .pillars{grid-template-columns:repeat(2,1fr)}
+      .test-grid{grid-template-columns:repeat(2,1fr)}
+      .features-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:720px){
+      .wrap{padding:18px}
+      .nav-links{display:none}
+      .hero{grid-template-columns:1fr; gap:18px}
+      .hero-right{justify-content:flex-start}
+      .pillars{grid-template-columns:1fr}
+      .schedule-grid{grid-template-columns:1fr}
+      .showcase-wrap{grid-template-columns:1fr}
+      .test-grid{grid-template-columns:1fr}
+      .features-grid{grid-template-columns:1fr}
+      .hero-left h1{font-size:28px}
+    }
+
+    .muted{color:var(--muted)}
+    .section-center { text-align:center; }
+  </style>
 </head>
 <body>
-    
+
+  <div class="wrap">
+
+    <!-- NAV -->
+    <header class="nav" role="banner">
+      <div class="brand">
+        <img src="Navbar Menu.png" alt="logo">
+      </div>
+
+<div>
+      </div>
+    </header>
+
+  <!-- HERO -->
+    <section class="hero" id="home" role="region" aria-label="Hero">
+      <div class="hero-left">
+        <h1><span class="accent">RUANG EKSPRESI</span> — Wadah kreatif & kompetitif mahasiswa</h1>
+        
+        
+        <div class="badges" aria-hidden="true">
+          <div class="badge">Ideation</div>
+          <div class="badge">Creation</div>
+          <div class="badge">Collaboration</div>
+          <div class="badge">Guidance</div>
+        </div>
+      </div>
+
+      <div class="hero-right" aria-hidden="true">
+        <div class="card-hero">
+          <img src="Frame 4.png" alt="hero image">
+        </div>
+      </div>
+    </section>
+
+    <!-- FOUR PILLARS -->
+    <section class="section" id="program" aria-label="Program">
+      <div class="section-center">
+        <h2>Empat Pilar <span style="color:var(--accent)">Ruang Ekspresi</span></h2>
+        <p class="lead muted">Komprehensif yang dirancang untuk mengembangkan potensi kreatif mahasiswa melalui pendekatan holistik.</p>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <h4>Ideation</h4>
+          <p>Mengembangkan ide-ide kreatif dan inovatif melalui brainstroming dan workshop ideation yang terarah.</p>
+        </div>
+        <div class="pillar">
+          <h4>Creation</h4>
+          <p>Mewujudkan ide mejadi karya nyata dengan dukungan tools dan teknologi terkini.</p>
+        </div>
+        <div class="pillar">
+          <h4>Collaboration</h4>
+          <p>Bekerja sama dalam tim multidisiplin untuk menciptakan solusi yang komprehensif.</p>
+        </div>
+        <div class="pillar">
+          <h4>Guidance & Support</h4>
+          <p>Mendapat bimbingan dari mentor berpengalaman dan akses ke berbagai resource pembelajaran.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="schedule" id="schedule" aria-label="Schedule">
+      <div class="schedule-header">
+        <h3>Jadwal & Program Kegiatan</h3>
+        <div class="muted">Program terstruktur yang dirancang untuk mengoptimalkan pembelajaran dan pengembangan skill Setiap Sabtu.</div>
+      </div>
+
+      <div class="schedule-grid">
+        <div class="sched-card">
+          <h4 style="margin:0 0 6px 0">Sesi Pagi</h4>
+          <div class="muted">09.00 - 12.00 WIB</div>
+          <p style="margin-top:8px">Workshop, Career Talks, dan Extra Classes intensif.</p>
+        </div>
+
+        <div class="sched-card">
+          <h4 style="margin:0 0 6px 0">Sesi Sore</h4>
+          <div class="muted">16.00 - 19.00 WIB</div>
+          <p style="margin-top:8px">Project work, mentoring dan Collaboration Session.</p>
+        </div>
+      </div>
+
+      <div class="schedule-features">
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="title">Career Talks</div>
+            <div class="desc">Sesi sharing dari praktisi industri dan alumni sukses.</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="title">Extra Classes</div>
+            <div class="desc">Kelas tambahan skill development dan workshop teknis.</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="title">Project Work</div>
+            <div class="desc">Mengerjakan project nyata dengan bimbingan mentor.</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="title">Mentoring</div>
+            <div class="desc">Sesi konsultasi personal dengan mentor berpengalaman.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="showcase" id="projects" aria-label="Project showcase">
+  <div class="section-center">
+    <h3 style="margin:0; font-size:22px;">Showcase <span style="color:var(--accent)">Student Projects</span></h3>
+    <div class="muted" style="margin-top:6px">karya-karya inovatif yang telah dihasilkan oleh mahasiswa dalam program Ruang Ekspresi.</div>
+  </div>
+
+  <div class="showcase-wrap" style="margin-top:18px;">
+    <div class="showcase-left">
+      <span class="pill-badge">UI / UX</span>
+      <h3 style="margin-top:10px">Creative Portfolio Platform</h3>
+      <p class="muted">Platform showcase karya mahasiswa dengan sistem rating dan feedback komunitas.</p>
+
+      <div class="author" style="margin-top:12px; justify-content:center;">
+        <img src="Frame 25.png" alt="avatar">
+        <div style="text-align:left; margin-left:12px;">
+          <div style="font-weight:700">Budi Santoso</div>
+          <div class="muted" style="font-size:13px">Frontend Developer</div>
+        </div>
+      </div>
+
+      <div class="author" style="margin-top:12px; justify-content:center;">
+        <img src="Frame 25.png" alt="avatar">
+        <div style="text-align:left; margin-left:12px;">
+          <div style="font-weight:700">Budi Santoso</div>
+          <div class="muted" style="font-size:13px">Frontend Developer</div>
+        </div>
+      </div>
+
+      <div class="author" style="margin-top:12px; justify-content:center;">
+        <img src="Frame 25.png" alt="avatar">
+        <div style="text-align:left; margin-left:12px;">
+          <div style="font-weight:700">Budi Santoso</div>
+          <div class="muted" style="font-size:13px">Frontend Developer</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; text-align:center;">
+        <a class="cta" href="#" style="background:var(--accent); display:inline-block; padding:9px 12px; border-radius:10px">Live Demo</a>
+      </div>
+    </div>
+
+    <div class="showcase-right" aria-hidden="true">
+      <img src="Frame 4.png" alt="project image">
+    </div>
+  </div>
+</section>
+
+      <div class="test-grid">
+        <div class="test-card">
+          <img class="avatar" src="Frame 138.png" alt="avatar">
+          <div>
+            <div style="font-weight:700">Budi Santoso</div>
+            <div class="muted" style="font-size:13px">Mahasiswa SI</div>
+            <p class="muted" style="margin-top:8px">Kolaborasi antar disiplin ilmu di sini luar biasa. Saya belajar banyak hal dari teman-teman dari jurusan lain.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="fgrid">
+      <div>
+        <img src="Frame 3 (1).png" alt="logo" style="height:40px; filter:brightness(10) invert(1)">
+        <p style="margin-top:10px; color:rgba(242, 244, 248, 0.9)">Wadah kreatif untuk mahasiswa yang ingin mengembangkan potensi melalui ideation, creation, collaboration, dan guidance.</p>
+      </div>
+      <div>
+        <h4 style="margin-bottom:10px">Quick Links</h4>
+        <ul style="list-style:none; padding:0; margin:0; color:rgba(231,238,252,0.95)">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#program">Program</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin-bottom:10px">Programs</h4>
+        <ul style="list-style:none; padding:0; margin:0; color:rgba(231,238,252,0.95)">
+          <li>Career Talks</li>
+          <li>Extra Classes</li>
+          <li>Project Work</li>
+          <li>Mentoring</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:18px; color:rgba(231,238,252,0.85)">© 2025 Ruang Ekspresi | All Rights Reserved</div>
+  </footer>
+
 </body>
-</html>
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-    <title>Portofolio Maliza</title>
-
-</head>
-
-<body>
-
-    <h1>Maliza</h1>
-
-    <h2>Mahasiswa Sistem Informasi</h2>
-
-
-    <p>Halo! Saya adalah seorang mahasiswa yang bersemangat untuk belajar tentang pengembangan web. Saya suka memecahkan masalah dan menciptakan aplikasi yang berguna bagi orang lain.</p>
-
-
-    <img src="/WhatsApp Image buat tekweb.jpg" alt="Foto profil Maliza ">
-
-
-    <h3>Hobi Saya:</h3>
-
-    <ul>
-
-        <li>Main roblox</li>
-
-        <li>Nonton Drakor</li>
-
-        <li>Denger Music</li>
-
-        <li>Tidurrr</li>
-
-
-
-    </ul>
-
-
-    <p>Kunjungi profil LinkedIn saya di <a href="https://www.linkedin.com/in/contohprofil">sini</a>.</p>
-
-
-</body>
-
 </html>
